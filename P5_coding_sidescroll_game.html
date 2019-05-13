@@ -1,0 +1,82 @@
+<html>
+  <head>
+      <script src ="p5.min.js"></script>
+      <script src ="p5.collide2d.min.js"></script>
+      <script src="p5.sound.min.js"></script>
+      <script src="P5_coding_jumper.js"></script>
+      <script src="P5_coding_obst.js"></script>
+      <script src="P5_coding_obst2.js"></script>
+      <style>
+        body{
+      margin:0;
+      padding:0;
+      overflow: hidden;
+      color:blue;
+    }
+
+      </style>
+      
+  </head>
+  <body>
+    
+    <script>
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    var hit = false;
+    var res = false;
+    var jumper = new jumper();
+    var obst = new obst();
+    var obst2 = new obst2();
+    var s = 0;
+    let i = 'Space to jump, Shift to plummet, Last as long as you can! Q is to restart.'
+    //backround
+    var gmi;
+    //jumper
+    var mc;
+    //first badguy
+    var bg;
+    //second badguy
+    var bg2;
+    var mySound;
+      function preload() {
+        //soundFormat('mp3');
+        mySound = loadSound('Riseofspirit.mp3');
+      }
+
+      function setup() {
+        gmi = loadImage('background_art.png');
+        mc = loadImage('main_character.png');
+        bg = loadImage('badguy_1.png');
+        bg2 = loadImage('badguy_2.png');
+        mySound.setVolume(1.0);
+        mySound.play();
+        createCanvas(w,h);
+      }
+      
+      function draw() {
+        clear();
+        background(gmi);
+        textSize(25);
+        text('Score: ' + s,45,35);
+        text(i, 25,60)
+        jumper.show();
+        jumper.update();
+        obst.show();
+        obst.update();
+        obst2.show();
+        obst2.update();
+      }
+      
+      function keyPressed() {
+        if(keyCode === 32) {
+          jumper.up();
+        }
+        //press Q
+        if(keyCode === 81) {
+          location.reload();
+        }
+      }
+      
+    </script>
+  </body>
+</html>
